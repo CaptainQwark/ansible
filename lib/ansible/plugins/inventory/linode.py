@@ -7,7 +7,7 @@ __metaclass__ = type
 DOCUMENTATION = r'''
     name: linode
     plugin_type: inventory
-    authors:
+    author:
       - Luke Murphy (@lwm)
     short_description: Ansible dynamic inventory plugin for Linode.
     version_added: "2.8"
@@ -16,7 +16,7 @@ DOCUMENTATION = r'''
         - linode_api4 >= 2.0.0
     description:
         - Reads inventories from the Linode API v4.
-        - Uses a C(<name>.linode.yaml) (or C(<name>.linode.yml)) YAML configuration file.
+        - Uses a YAML configuration file that ends with linode.(yml|yaml).
         - Linode labels are used by default as the hostnames.
         - The inventory groups are built from groups and not tags.
     options:
@@ -186,7 +186,7 @@ class InventoryModule(BaseInventoryPlugin):
     def verify_file(self, path):
         """Verify the Linode configuration file."""
         if super(InventoryModule, self).verify_file(path):
-            endings = ('.linode.yaml', '.linode.yml')
+            endings = ('linode.yaml', 'linode.yml')
             if any((path.endswith(ending) for ending in endings)):
                 return True
         return False

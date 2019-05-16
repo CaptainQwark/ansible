@@ -19,8 +19,8 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
-from ansible.compat.tests import unittest
-from ansible.compat.tests.mock import patch, MagicMock
+from units.compat import unittest
+from units.compat.mock import patch, MagicMock
 
 from ansible.errors import AnsibleError, AnsibleParserError
 from ansible.module_utils.common._collections_compat import Container
@@ -329,6 +329,7 @@ class TestRole(unittest.TestCase):
         })
 
         mock_play = MagicMock()
+        mock_play.collections = None
         mock_play.ROLE_CACHE = {}
 
         i = RoleInclude.load('foo_metadata', play=mock_play, loader=fake_loader)
